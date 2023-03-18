@@ -67,6 +67,7 @@ function handlePress(event: KeyboardEvent) {
         <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
         <NButton
           block
+          class="umami--click--verify-button"
           type="primary"
           :disabled="disabled"
           :loading="loading"

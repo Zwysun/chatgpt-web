@@ -46,8 +46,29 @@ const promptStore = usePromptStore()
 // 使用storeToRefs，保证store修改后，联想部分能够重新渲染
 const { promptList: promptTemplate } = storeToRefs<any>(promptStore)
 
+function sendUmamiEvent(event: string) {
+  const eventData = {
+    payload: {
+      website: '1416ba03-938b-4866-8bbb-c633ae73425d',
+      url: window.location.search + window.location.hash,
+      event_name: event,
+      hostname: window.location.hostname,
+      language: window.navigator.language,
+      screen: `${window.screen.width}x${window.screen.height}`
+    },
+    type: 'event'
+  };
+  
+  fetch('https://go.animo.top/api/collect', {
+    method: 'POST',
+    body: JSON.stringify(eventData),
+    headers: { 'Content-Type': 'application/json' }
+  })
+}
+
 function handleSubmit() {
   onConversation()
+  sendUmamiEvent('chat-submit')
 }
 
 async function onConversation() {
@@ -536,7 +557,7 @@ onUnmounted(() => {
               />
             </template>
           </NAutoComplete>
-          <NButton type="primary" :disabled="buttonDisabled" @click="handleSubmit">
+          <NButton class="umami--click--submit-button" type="primary" :disabled="buttonDisabled" @click="handleSubmit">
             <template #icon>
               <span class="dark:text-black">
                 <SvgIcon icon="ri:send-plane-fill" />
