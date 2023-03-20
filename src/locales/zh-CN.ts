@@ -25,7 +25,7 @@ export default {
     success: '操作成功',
     failed: '操作失败',
     verify: '验证',
-    unauthorizedTips: '未经授权，请先进行验证。',
+    unauthorizedTips: '未经授权，请先进行验证。（提供者姓名首字母小写）',
   },
   chat: {
     placeholder: '来说点什么吧...（Shift + Enter = 换行）',
