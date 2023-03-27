@@ -8,6 +8,7 @@ import { isNotEmptyString } from './utils/is'
 
 const app = express()
 const router = express.Router()
+const port = process.env.PORT || 3002;
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -84,4 +85,4 @@ app.use('', router)
 app.use('/api', router)
 app.set('trust proxy', 1)
 
-app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+app.listen(port, () => globalThis.console.log(`Server is running on port ${port}`))
